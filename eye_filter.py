@@ -3,7 +3,7 @@ import cv2
 
 face_cascade = cv2.CascadeClassifier('face_trainer.xml')
 eye_cascade = cv2.CascadeClassifier('eye_detect_trainer.xml')
-eye_filter = cv2.imread('fire2.png')
+eye_filter = cv2.imread('fire2.png') #You can change the effect here by replacing with your own png image.
 cap = cv2.VideoCapture(0)
 
 while cap.isOpened():
@@ -21,7 +21,7 @@ while cap.isOpened():
         for (ex,ey,ew,eh) in eyes:
             eye_resize = cv2.resize(eye_filter,(ew,eh))
             eyeGray = cv2.cvtColor(eye_resize,cv2.COLOR_BGR2GRAY)
-            _,eyeMask = cv2.threshold(eyeGray,135,255,cv2.THRESH_BINARY)
+            _,eyeMask = cv2.threshold(eyeGray,135,255,cv2.THRESH_BINARY) #You have to change the threshold value to get the proper visibility of the effect.
             eyeMaskInv = cv2.bitwise_not(eyeMask)
             roi = roi_color[ey:ey+eh,ex:ex+ew]
             eye_bg = cv2.bitwise_and(roi,roi,mask=eyeMaskInv)
